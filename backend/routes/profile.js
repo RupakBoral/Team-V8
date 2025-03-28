@@ -1,6 +1,6 @@
 const express = require("express");
-const { userAuth } = require("../../middlewares/userAuth");
-const DoctorModel = require("../../models/doctor");
+const { userAuth } = require("../middlewares/userAuth");
+const DoctorModel = require("../models/doctor");
 
 const ProfileRouter = express.Router();
 
