@@ -1,14 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const DBconnection = require("./connection.js");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
-const AuthDoctorRouter = require("./routes/doctor/auth.js");
+const AuthRouter = require("./routes/doctor/auth.js");
+const ProfileRouter = require("./routes/doctor/profile.js");
 
-app.use("/", AuthDoctorRouter);
+app.use("/", AuthRouter);
+
+app.use("/", ProfileRouter);
 
 DBconnection()
   .then(() => {

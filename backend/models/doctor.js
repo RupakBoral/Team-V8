@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var jwt = require("jsonwebtoken");
 
 const doctorSchema = new mongoose.Schema({
   firstName: {
@@ -49,6 +50,31 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     enum: ["verified", "pending"],
   },
+  profilePic: {
+    type: String,
+  },
+  RegistrationId: {
+    type: String,
+    required: true,
+  },
+  registrationCertificate: {
+    type: String,
+  },
+  contactEmail: {
+    type: String,
+  },
+  hospitalName: {
+    type: String,
+  },
+  hospitalAddress: {
+    type: String,
+  },
+  hospitalContact: {
+    type: String,
+  },
+  hospitalEmail: {
+    type: String,
+  },
   noOfPatientsConsulted: {
     type: Number,
     default: 0,
@@ -62,5 +88,12 @@ const doctorSchema = new mongoose.Schema({
     default: undefined,
   },
 });
+
+doctorSchema.methods.getJWT = async function () {
+  const user = this;
+  const jwtValue = { _id: user._id };
+  var token = jwt.sign(jwtValue, "TEAM-V8");
+  return token;
+};
 
 module.exports = mongoose.model("doctor", doctorSchema);
