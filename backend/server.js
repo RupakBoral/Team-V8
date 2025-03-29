@@ -19,12 +19,15 @@ app.use(cookieParser());
 const AuthRouter = require("./routes/auth.js");
 const ProfileRouter = require("./routes/profile.js");
 const ConsultRouter = require("./routes/consult.js");
+const AppointmentRouter = require("./routes/appointment.js");
 
 app.use("/", AuthRouter);
 
 app.use("/", ProfileRouter);
 
 app.use("/", ConsultRouter);
+
+app.use("/", AppointmentRouter);
 
 DBconnection()
   .then(() => {

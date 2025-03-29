@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {
-  Calendar,
+  // Calendar,
   Clock,
   Video,
   MessageSquare,
@@ -14,20 +14,65 @@ import {
 
 function App() {
   const [activeTab, setActiveTab] = useState("book");
-  const [selectedSpecialty, setSelectedSpecialty] = useState("All Specialties");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState("Any");
   const [selectedType, setSelectedType] = useState("Any Type");
 
   const [specialization, setSpecialization] = useState("");
+  const [location, setLocation] = useState("");
+  const [experience, setExperience] = useState("");
   const [doctors, setDoctors] = useState(null);
   const [error, setError] = useState("");
 
-  const fetchDoctors = async () => {
+  const [appointments, setAppointment] = useState();
+
+  const fetchBooking = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/appointments", {
+        withCredentials: true,
+      });
+      setAppointment(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchBooking();
+  }, []);
+
+  const fetchDoctorsBySpecialization = async () => {
     try {
       setError(""); // Reset error before fetching
       const response = await axios.get(
         `http://localhost:5000/specialize/${specialization}`,
+        { withCredentials: true }
+      );
+      console.log(response.data.data);
+      setDoctors(response.data.data);
+    } catch (err) {
+      console.error("Error fetching doctors:", err);
+      setError("Failed to fetch doctors. Please try again.");
+    }
+  };
+  const fetchDoctorsByLocation = async () => {
+    try {
+      setError(""); // Reset error before fetching
+      const response = await axios.get(
+        `http://localhost:5000/doctor/${location}`,
+        { withCredentials: true }
+      );
+      setDoctors(response.data.data);
+    } catch (err) {
+      console.error("Error fetching doctors:", err);
+      setError("Failed to fetch doctors. Please try again.");
+    }
+  };
+  const fetchDoctorsByExperience = async () => {
+    try {
+      setError(""); // Reset error before fetching
+      const response = await axios.get(
+        `http://localhost:5000/doctor/${experience}`,
         { withCredentials: true }
       );
       console.log(response.data.data);
@@ -80,27 +125,6 @@ function App() {
   //   },
   // ];
 
-  const appointments = [
-    {
-      id: 1,
-      doctor: "Dr. Sarah Johnson",
-      specialty: "Cardiology",
-      date: "March 30, 2025",
-      time: "3:00 PM",
-      type: "Video",
-      status: "Confirmed",
-    },
-    {
-      id: 2,
-      doctor: "Dr. Michael Chen",
-      specialty: "Neurology",
-      date: "April 2, 2025",
-      time: "10:00 AM",
-      type: "Chat",
-      status: "Pending",
-    },
-  ];
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Main Content */}
@@ -146,10 +170,24 @@ function App() {
                 <Search className="h-5 w-5 text-gray-400 mr-2" />
                 <input
                   type="text"
-                  placeholder="Search doctors by name or specialty..."
+                  placeholder="Search doctors by specialty..."
                   className="flex-1 p-2 border border-gray-300 rounded-md"
                   onChange={(e) => setSpecialization(e.target.value)}
-                  onKeyDownCapture={fetchDoctors}
+                  onKeyDownCapture={fetchDoctorsBySpecialization}
+                />
+                <input
+                  type="text"
+                  placeholder="Search doctors by location..."
+                  className="flex-1 p-2 border border-gray-300 rounded-md"
+                  onChange={(e) => setLocation(e.target.value)}
+                  onKeyDownCapture={fetchDoctorsByLocation}
+                />
+                <input
+                  type="text"
+                  placeholder="Search doctors by experience..."
+                  className="flex-1 p-2 border border-gray-300 rounded-md"
+                  onChange={(e) => setExperience(e.target.value)}
+                  onKeyDownCapture={fetchDoctorsByExperience}
                 />
               </div>
 
@@ -160,8 +198,9 @@ function App() {
                   </label>
                   <select
                     className="w-full p-2 border border-gray-300 rounded-md"
-                    value={selectedSpecialty}
-                    onChange={(e) => setSelectedSpecialty(e.target.value)}
+                    value={specialization}
+                    onClick={(e) => setSpecialization(e.target.value)}
+                    onChange={fetchDoctorsBySpecialization}
                   >
                     <option>All Specialties</option>
                     <option>Cardiology</option>
@@ -311,55 +350,34 @@ function App() {
                 Upcoming Appointments
               </h2>
               <div className="space-y-4">
-                {appointments.map((appointment) => (
+                {appointments.map((patient, index) => (
                   <div
-                    key={appointment.id}
+                    key={index}
                     className="bg-white p-6 rounded-lg shadow-sm"
                   >
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="text-lg font-semibold">
-                          {appointment.doctor}
+                          {patient.firstName + patient.lastName}
                         </h3>
-                        <p className="text-gray-600">{appointment.specialty}</p>
-                        <div className="flex items-center mt-2 text-gray-600">
-                          <Calendar className="h-4 w-4 mr-2" />
-                          {appointment.date}
-                          <Clock className="h-4 w-4 mx-2" />
-                          {appointment.time}
-                        </div>
+
+                        <p>Symptoms: {patient.symptoms}</p>
+
                         <div className="flex items-center mt-2">
-                          {appointment.type === "Video" ? (
+                          {patient.type === "Video" ? (
                             <Video className="h-4 w-4 mr-2" />
                           ) : (
                             <MessageSquare className="h-4 w-4 mr-2" />
                           )}
-                          {appointment.type} Consultation
+                          {patient.type} Consultation
                         </div>
                       </div>
                       <div className="text-right">
                         <span
-                          className={`inline-block px-3 py-1 rounded-full text-sm ${
-                            appointment.status === "Confirmed"
-                              ? "bg-green-100 text-green-800"
-                              : "bg-yellow-100 text-yellow-800"
-                          }`}
+                          className={`inline-block px-3 py-1 rounded-full text-sm `}
                         >
-                          {appointment.status}
+                          Pending
                         </span>
-                        <div className="mt-4 space-x-2">
-                          {appointment.status === "Confirmed" && (
-                            <button className="bg-black text-white px-4 py-2 rounded-md">
-                              Join
-                            </button>
-                          )}
-                          <button className="border border-gray-300 text-gray-700 px-4 py-2 rounded-md">
-                            Reschedule
-                          </button>
-                          <button className="text-red-600 px-4 py-2 rounded-md">
-                            Cancel
-                          </button>
-                        </div>
                       </div>
                     </div>
                   </div>
