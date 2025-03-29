@@ -13,11 +13,29 @@ import {
 
 function App() {
   const [activeTab, setActiveTab] = useState("book");
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedSpecialty, setSelectedSpecialty] = useState("All Specialties");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedAvailability, setSelectedAvailability] = useState("Any");
   const [selectedType, setSelectedType] = useState("Any Type");
+
+  const [specialization, setSpecialization] = useState("");
+  const [doctors, setDoctors] = useState(null);
+  const [error, setError] = useState("");
+
+  const fetchDoctors = async () => {
+    try {
+      setError(""); // Reset error before fetching
+      const response = await axios.get(
+        `http://localhost:5000/specialize/${specialization}`,
+        { withCredentials: true }
+      );
+      console.log(response.data.data);
+      setDoctors(response.data.data);
+    } catch (err) {
+      console.error("Error fetching doctors:", err);
+      setError("Failed to fetch doctors. Please try again.");
+    }
+  };
 
   // const doctors = [
   //   {
@@ -129,8 +147,8 @@ function App() {
                   type="text"
                   placeholder="Search doctors by name or specialty..."
                   className="flex-1 p-2 border border-gray-300 rounded-md"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => setSpecialization(e.target.value)}
+                  onKeyDownCapture={fetchDoctors}
                 />
               </div>
 
@@ -198,90 +216,78 @@ function App() {
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">Available Doctors</h2>
                 <span className="text-gray-500">
-                  Showing {doctors.length} doctors
+                  Showing {doctors !== null ? doctors.length : 0} doctors
                 </span>
               </div>
 
-              {doctors.map((doctor) => (
-                <div
-                  key={doctor.id}
-                  className="bg-white p-6 rounded-lg shadow-sm"
-                >
-                  <div className="flex justify-between">
-                    <div className="flex space-x-4">
-                      <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                        <span className="text-gray-500 text-2xl">👤</span>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold">
-                          {doctor.firstName + doctor.lastName}
-                        </h3>
-                        <div className="flex items-center text-gray-600 mt-1">
-                          <span>{doctor.specialization}</span>
-                          <span className="mx-2">•</span>
-                          <Building2 className="h-4 w-4" />
-                          <span className="ml-1">{doctor.hospital}</span>
+              {doctors !== null &&
+                doctors.map((doctor) => (
+                  <div
+                    key={doctor.id}
+                    className="bg-white p-6 rounded-lg shadow-sm"
+                  >
+                    <div className="flex justify-between">
+                      <div className="flex space-x-4">
+                        <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+                          <span className="text-gray-500 text-2xl">👤</span>
                         </div>
-                        <div className="flex items-center mt-1">
-                          <Star className="h-4 w-4 text-yellow-400" />
-                          <span className="ml-1">
-                            {doctor.rating}/5 ({doctor.reviews} reviews)
-                          </span>
+                        <div>
+                          <h3 className="text-xl font-semibold">
+                            {doctor.firstName + doctor.lastName}
+                          </h3>
+                          <div className="flex items-center text-gray-600 mt-1">
+                            <span>{doctor.specialization}</span>
+                            <span className="mx-2">•</span>
+                            <Building2 className="h-4 w-4" />
+                            <span className="ml-1">{doctor.hospital}</span>
+                          </div>
+                          <div className="flex items-center mt-1">
+                            <Star className="h-4 w-4 text-yellow-400" />
+                            <span className="ml-1">5 </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="text-right">
-                      <div
-                        className={`inline-flex items-center ${
-                          doctor.status === "Available"
-                            ? "text-green-600"
-                            : "text-orange-600"
-                        }`}
-                      >
-                        <span
-                          className={`w-2 h-2 rounded-full mr-2 ${
+                      <div className="text-right">
+                        <div
+                          className={`inline-flex items-center ${
                             doctor.status === "Available"
-                              ? "bg-green-600"
-                              : "bg-orange-600"
+                              ? "text-green-600"
+                              : "text-orange-600"
                           }`}
-                        ></span>
-                        {doctor.status}
-                      </div>
-                      <div className="text-gray-600 mt-1">
-                        <Clock className="h-4 w-4 inline mr-1" />
-                        Next available: {doctor.nextAvailable}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center">
-                        <Video className="h-5 w-5 text-gray-400 mr-1" />
-                        <span>Video Consultation</span>
-                      </div>
-                      <div className="flex items-center">
-                        <MessageSquare className="h-5 w-5 text-gray-400 mr-1" />
-                        <span>Chat Consultation</span>
+                        >
+                          <span
+                            className={`w-2 h-2 rounded-full mr-2 ${
+                              doctor.status === "Available"
+                                ? "bg-green-600"
+                                : "bg-orange-600"
+                            }`}
+                          ></span>
+                          {doctor.status}
+                        </div>
+                        <div className="text-gray-600 mt-1">
+                          <Clock className="h-4 w-4 inline mr-1" />
+                          Next available:
+                        </div>
                       </div>
                     </div>
-                    <button className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800">
-                      Book Appointment
-                    </button>
-                  </div>
 
-                  <div className="mt-4 flex space-x-4">
-                    {doctor.timeSlots.map((slot, index) => (
-                      <button
-                        key={index}
-                        className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                      >
-                        {slot}
+                    <div className="mt-4 flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="flex items-center">
+                          <Video className="h-5 w-5 text-gray-400 mr-1" />
+                          <span>Video Consultation</span>
+                        </div>
+                        <div className="flex items-center">
+                          <MessageSquare className="h-5 w-5 text-gray-400 mr-1" />
+                          <span>Chat Consultation</span>
+                        </div>
+                      </div>
+                      <button className="bg-black text-white px-6 py-2 rounded-md hover:bg-gray-800">
+                        Book Appointment
                       </button>
-                    ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </p>
         ) : (
