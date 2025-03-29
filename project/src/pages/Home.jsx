@@ -5,7 +5,7 @@ function Home() {
   return (
     <div className="space-y-24">
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative py-20 px">
       {/* Background Video */}
       <video 
         autoPlay 
@@ -13,7 +13,7 @@ function Home() {
         muted 
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
       >
-        <source src="/mclaren-4.mp4" type="video/mp4" />
+        <source src="/background.mp4" type="video/mp4" />
       </video>
       
       {/* Overlay */}
