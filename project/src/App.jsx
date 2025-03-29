@@ -8,6 +8,7 @@ import DoctorProfile from "./pages/DoctorProfile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import AdminDashboard from "./pages/AdminDashboard";
+import SignupDoc from "./pages/SignupDoc";
 import Appointment from "./pages/Appointment";
 
 function App() {
