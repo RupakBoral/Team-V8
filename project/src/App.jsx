@@ -10,6 +10,7 @@ import Signup from "./pages/Signup";
 import AdminDashboard from "./pages/AdminDashboard";
 import SignupDoc from "./pages/SignupDoc";
 import Appointment from "./pages/Appointment";
+import News from "./pages/News";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/consultations" element={<OnlineConsultation />} />
             <Route path="/profile/:id" element={<DoctorProfile />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/news" element={<News />} />
             <Route path="/appointment" element={<Appointment />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/SignupDocup" element={<SignupDoc />} />

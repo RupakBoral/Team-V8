@@ -1,32 +1,48 @@
-import React, { useState } from 'react';
-import { ClipboardList, Stethoscope } from 'lucide-react';
+import { useState } from "react";
+import { Stethoscope } from "lucide-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [formData, setFormData] = useState({
-    emailId: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    age: '',
-    gender: '',
-    mbbs: '',
-    md: '',
-    specialization: '',
-    registrationId: '',
-    location: ''
-  });
+  const [emailId, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [mbbs, setMbbs] = useState("");
+  const [md, setMd] = useState("");
+  const [specialization, setSpecialization] = useState("");
+  const [registrationId, setRegistrationId] = useState("");
+  const [location, setLocation] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    console.log("object");
+    try {
+      await axios.post(
+        "http://localhost:5000/d/signup",
+        {
+          emailId,
+          password,
+          firstName,
+          lastName,
+          age,
+          gender,
+          md,
+          mbbs,
+          specialization,
+          registrationId,
+          location,
+        },
+        { withCredentials: true }
+      );
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -38,98 +54,112 @@ function App() {
               <Stethoscope className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">Doctor Registration</h2>
+          <h2 className="mt-6 text-3xl font-bold text-gray-900">
+            Doctor Registration
+          </h2>
           <p className="mt-2 text-gray-600">Join our medical community</p>
         </div>
 
         <div className="mt-8 bg-white py-8 px-4 shadow-lg rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSignUp}>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {/* Personal Information */}
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="firstName"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   First Name
                 </label>
                 <input
                   type="text"
                   id="firstName"
                   name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Last Name
                 </label>
                 <input
                   type="text"
                   id="lastName"
                   name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
+                  onChange={(e) => setLastName(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="emailId" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="emailId"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="emailId"
                   name="emailId"
-                  value={formData.emailId}
-                  onChange={handleChange}
+                  onChange={(e) => setEmailId(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  value={formData.password}
-                  onChange={handleChange}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="age" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="age"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Age
                 </label>
                 <input
                   type="number"
                   id="age"
                   name="age"
-                  value={formData.age}
-                  onChange={handleChange}
+                  onChange={(e) => setAge(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="gender"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Gender
                 </label>
                 <select
                   id="gender"
                   name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
+                  onChange={(e) => setGender(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 >
@@ -142,15 +172,17 @@ function App() {
 
               {/* Professional Information */}
               <div>
-                <label htmlFor="mbbs" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="mbbs"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   MBBS Details
                 </label>
                 <input
                   type="text"
                   id="mbbs"
                   name="mbbs"
-                  value={formData.mbbs}
-                  onChange={handleChange}
+                  onChange={(e) => setMbbs(e.target.value)}
                   placeholder="University and Year"
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
@@ -158,29 +190,33 @@ function App() {
               </div>
 
               <div>
-                <label htmlFor="md" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="md"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   MD/MS Details
                 </label>
                 <input
                   type="text"
                   id="md"
                   name="md"
-                  value={formData.md}
-                  onChange={handleChange}
+                  onChange={(e) => setMd(e.target.value)}
                   placeholder="Specialization and University"
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 />
               </div>
 
               <div>
-                <label htmlFor="specialization" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="specialization"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Specialization
                 </label>
                 <select
                   id="specialization"
                   name="specialization"
-                  value={formData.specialization}
-                  onChange={handleChange}
+                  onChange={(e) => setSpecialization(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 >
@@ -197,31 +233,35 @@ function App() {
               </div>
 
               <div>
-                <label htmlFor="registrationId" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="registrationId"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Medical Registration ID
                 </label>
                 <input
                   type="text"
                   id="registrationId"
                   name="registrationId"
-                  value={formData.registrationId}
-                  onChange={handleChange}
+                  onChange={(e) => setRegistrationId(e.target.value)}
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="location"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Practice Location
                 </label>
                 <input
                   type="text"
                   id="location"
                   name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  placeholder="City, State"
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="City"
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   required
                 />
@@ -239,7 +279,10 @@ function App() {
 
             <div className="text-center text-sm mt-4">
               <span className="text-gray-600">Already registered? </span>
-              <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+              <a
+                href="#"
+                className="font-medium text-blue-600 hover:text-blue-500"
+              >
                 Sign in
               </a>
             </div>

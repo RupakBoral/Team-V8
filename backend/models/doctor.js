@@ -4,7 +4,6 @@ var jwt = require("jsonwebtoken");
 const doctorSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: true,
   },
   lastName: {
     type: String,
@@ -14,29 +13,25 @@ const doctorSchema = new mongoose.Schema({
   },
   emailId: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
   },
   gender: {
     type: String,
     enum: ["male", "female", "other"],
-    required: true,
   },
   age: {
     type: Number,
-    required: true,
   },
   MBBS: {
     type: String,
-    required: true,
+
     enum: ["yes", "no"],
   },
   MD: {
     type: String,
-    required: true,
+
     enum: ["yes", "no"],
   },
   specialization: {
@@ -56,11 +51,10 @@ const doctorSchema = new mongoose.Schema({
   },
   RegistrationId: {
     type: String,
-    required: true,
   },
   location: {
     type: String,
-    required: true,
+
     lowercase: true,
   },
   registrationCertificate: {

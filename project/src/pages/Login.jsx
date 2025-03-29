@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
-import { ClipboardList } from 'lucide-react';
+import { useState } from "react";
+import { ClipboardList } from "lucide-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
+  const [emailId, setEmailId] = useState();
+  const [password, setPassword] = useState();
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    try {
+      await axios.post(
+        "http://localhost:5000/d/login",
+        { emailId, password },
+        {
+          withCredentials: true,
+        }
+      );
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -29,22 +34,28 @@ function App() {
               <ClipboardList className="h-8 w-8 text-white" />
             </div>
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">Welcome back</h2>
-          <p className="mt-2 text-gray-600">Enter your credentials to access your account</p>
+          <h2 className="mt-6 text-3xl font-bold text-gray-900">
+            Welcome back
+          </h2>
+          <p className="mt-2 text-gray-600">
+            Enter your credentials to access your account
+          </p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                onChange={(e) => setEmailId(e.target.value)}
                 className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                 placeholder="m@example.com"
               />
@@ -52,10 +63,16 @@ function App() {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Password
                 </label>
-                <a href="#" className="text-sm text-blue-600 hover:text-blue-500">
+                <a
+                  href="#"
+                  className="text-sm text-blue-600 hover:text-blue-500"
+                >
                   Forgot password?
                 </a>
               </div>
@@ -63,8 +80,7 @@ function App() {
                 type="password"
                 id="password"
                 name="password"
-                value={formData.password}
-                onChange={handleChange}
+                onChange={(e) => setPassword(e.target.value)}
                 className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
             </div>
@@ -82,7 +98,9 @@ function App() {
               <div className="w-full border-t border-gray-300" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">OR CONTINUE WITH</span>
+              <span className="px-2 bg-white text-gray-500">
+                OR CONTINUE WITH
+              </span>
             </div>
           </div>
 
@@ -102,8 +120,11 @@ function App() {
           </div>
 
           <div className="text-center text-sm">
-            <span className="text-gray-600">Don't have an account? </span>
-            <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+            <span className="text-gray-600">Dont have an account? </span>
+            <a
+              href="#"
+              className="font-medium text-blue-600 hover:text-blue-500"
+            >
               Sign up
             </a>
           </div>
