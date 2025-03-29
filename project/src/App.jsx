@@ -8,6 +8,9 @@ import DoctorProfile from './pages/DoctorProfile';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminDashboard from './pages/AdminDashboard';
+import Appointment from './pages/Appointment';
+
+
 
 function App() {
   return (
@@ -18,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/forum" element={<DoctorForum />} />
+            <Route path="/appointment" element={<Appointment />} />
             <Route path="/hospitals" element={<HospitalDirectory />} />
             <Route path="/consultations" element={<OnlineConsultation />} />
             <Route path="/profile/:id" element={<DoctorProfile />} />

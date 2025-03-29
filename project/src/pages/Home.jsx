@@ -56,10 +56,11 @@ function Home() {
             <p className="text-gray-600 mb-4">
               Connect with peers, share research, and discuss complex cases in a secure environment.
             </p>
-            <Link to="/forum" className="text-black font-medium hover:underline inline-flex items-center">
-              Explore Forum
-              <span className="ml-2">→</span>
-            </Link>
+            <Link to="/forum" 
+  className="text-black font-medium hover:underline inline-flex items-center border border-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200">
+        Explore Forum 
+        <span className="ml-2">→</span>
+</Link>
           </div>
 
           <div className="text-center p-6">
@@ -70,21 +71,21 @@ function Home() {
             <p className="text-gray-600 mb-4">
               Find specialized hospitals and doctors based on location, expertise, and patient ratings.
             </p>
-            <Link to="/hospitals" className="text-black font-medium hover:underline inline-flex items-center">
+            <Link to="/hospitals" className="text-black font-medium hover:underline inline-flex items-center border border-black px-4 py-2 rounded-lg hover:bg-slate-200 transition-all duration-200">
               Find Hospitals
               <span className="ml-2">→</span>
             </Link>
           </div>
 
           <div className="text-center p-6">
-            <div className="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ">
               <FaCalendarCheck className="text-2xl" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Online Consultations</h3>
             <p className="text-gray-600 mb-4">
               Book consultations with specialists and receive medical advice from qualified professionals.
             </p>
-            <Link to="/consultations" className="text-black font-medium hover:underline inline-flex items-center">
+            <Link to="/consultations" className="text-black font-medium hover:underline inline-flex items-center border border-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200">
               Book Appointment
               <span className="ml-2">→</span>
             </Link>

@@ -12,10 +12,10 @@ function Navbar() {
           </Link>
           
           <div className="hidden md:flex space-x-8">
-            <Link to="/forum" className="text-gray-600 hover:text-gray-900">Doctor Forum</Link>
-            <Link to="/hospitals" className="text-gray-600 hover:text-gray-900">Hospital Directory</Link>
-            <Link to="/consultations" className="text-gray-600 hover:text-gray-900">Online Consultations</Link>
-            <Link to="/about" className="text-gray-600 hover:text-gray-900">About</Link>
+            <Link to="/forum" className="text-gray-600 hover:text-gray-900 font-bold">Doctor Forum</Link>
+            <Link to="/hospitals" className="text-gray-600 hover:text-gray-900 font-bold">Hospital Directory</Link>
+            <Link to="/consultations" className="text-gray-600 hover:text-gray-900 font-bold">Online Consultations</Link>
+            <Link to="/about" className="text-gray-600 hover:text-gray-900 font-bold">About</Link>
           </div>
 
           <div className="flex items-center space-x-4">
