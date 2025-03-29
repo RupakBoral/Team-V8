@@ -1,16 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import DoctorForum from './pages/DoctorForum';
-import HospitalDirectory from './pages/HospitalDirectory';
-import OnlineConsultation from './pages/OnlineConsultation';
-import DoctorProfile from './pages/DoctorProfile';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import AdminDashboard from './pages/AdminDashboard';
-import Appointment from './pages/Appointment';
-
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import DoctorForum from "./pages/DoctorForum";
+import HospitalDirectory from "./pages/HospitalDirectory";
+import OnlineConsultation from "./pages/OnlineConsultation";
+import DoctorProfile from "./pages/DoctorProfile";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import AdminDashboard from "./pages/AdminDashboard";
+import Appointment from "./pages/Appointment";
 
 function App() {
   return (
@@ -26,6 +24,7 @@ function App() {
             <Route path="/consultations" element={<OnlineConsultation />} />
             <Route path="/profile/:id" element={<DoctorProfile />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/appointment" element={<Appointment />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
