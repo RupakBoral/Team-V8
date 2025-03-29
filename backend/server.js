@@ -4,7 +4,15 @@ const cookieParser = require("cookie-parser");
 const DBconnection = require("./connection.js");
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5000"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 

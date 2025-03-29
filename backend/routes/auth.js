@@ -3,7 +3,7 @@ const DoctorModel = require("../models/doctor");
 
 const AuthRouter = express.Router();
 
-AuthRouter.get("/d/", (req, res) => {
+AuthRouter.get("/", (req, res) => {
   res.send("Hello Doctor");
 });
 
@@ -18,10 +18,16 @@ AuthRouter.post("/d/login", async (req, res) => {
     if (userPassword !== password) {
       throw new Error("Invalid Credentials!");
     }
+
     const token = await user.getJWT();
-    res.cookie("token", token);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // Required for HTTPS
+      sameSite: "none",
+    });
     res.status(200).send(user);
   } catch (err) {
+    console.log(err);
     res.status(400).send(err.message);
   }
 });
