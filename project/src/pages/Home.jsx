@@ -5,25 +5,39 @@ function Home() {
   return (
     <div className="space-y-24">
       {/* Hero Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Connecting Healthcare Professionals Worldwide
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            A secure platform for doctors to collaborate, share knowledge, and provide better patient care through collective expertise.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Link to="/signup" className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800">
-              Join as Doctor
-            </Link>
-            <Link to="/signup" className="border border-black text-black px-6 py-3 rounded-lg hover:bg-gray-50">
-              Join as Patient
-            </Link>
-          </div>
+      <section className="relative py-20 px-4">
+      {/* Background Video */}
+      <video 
+        autoPlay 
+        loop 
+        muted 
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <source src="/mclaren-4.mp4" type="video/mp4" />
+      </video>
+      
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+      
+      <div className="relative max-w-4xl mx-auto text-center text-white z-10">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6">
+          Connecting Healthcare Professionals Worldwide
+        </h1>
+        <p className="text-xl text-gray-200 mb-8">
+          A secure platform for doctors to collaborate, share knowledge, and provide better patient care through collective expertise.
+        </p>
+        <div className="flex justify-center gap-4">
+          <Link to="/signup" className="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-300">
+            Join as Doctor
+          </Link>
+          <Link to="/signup" className="border border-white text-white px-6 py-3 rounded-lg hover:bg-white hover:text-black">
+            Join as Patient
+          </Link>
         </div>
-      </section>
+      </div>
+    </section>
 
+    
       {/* Features Section */}
       <section className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
