@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 import { FaUserMd, FaHospital, FaCalendarCheck, FaComments } from 'react-icons/fa';
 
+const brandLogos = [
+  "public/images//img1.jpg",
+  "public/images//img2.jpg",
+  "public/images//img3.jpg",
+  "public/images//img4.jpg",
+  "public/images//img5.jpg"
+];
+
 function Home() {
   return (
     <div className="space-y-24">
@@ -27,17 +35,54 @@ function Home() {
           A secure platform for doctors to collaborate, share knowledge, and provide better patient care through collective expertise.
         </p>
         <div className="flex justify-center gap-4">
-          <Link to="/signup" className="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-300">
+          <Link to="/Signup" className="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-300">
             Join as Doctor
           </Link>
-          <Link to="/signup" className="border border-white text-white px-6 py-3 rounded-lg hover:bg-white hover:text-black">
+          <Link to="/Signup" className="border border-white text-white px-6 py-3 rounded-lg hover:bg-white hover:text-black">
             Join as Patient
           </Link>
         </div>
       </div>
     </section>
 
-    
+  
+   {/* Brand Slider Section */}
+   <section className=" overflow-hidden">
+        <div className="relative">
+          <div className="flex animate-scroll space-x-10">
+            {[...brandLogos, ...brandLogos].map((logo, index) => (
+              <div key={index} className="flex-none w-48 h-24 top-0">
+                <img 
+                  src={logo} 
+                  alt={`Partner Brand ${index + 1}`}
+                  className="w-full h-full object-contain  hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+       {/* Tailwind CSS for animation */}
+       <style>
+        {`
+          @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+          }
+          .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+          }
+        `}
+      </style>
+  
+
+
+
+
       {/* Features Section */}
       <section className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
@@ -57,7 +102,7 @@ function Home() {
               Connect with peers, share research, and discuss complex cases in a secure environment.
             </p>
             <Link to="/forum" 
-  className="text-black font-medium hover:underline inline-flex items-center border border-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200">
+  className="text-black font-medium hover:underline inline-flex items-center border-black border-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200">
         Explore Forum 
         <span className="ml-2">→</span>
 </Link>
@@ -71,7 +116,7 @@ function Home() {
             <p className="text-gray-600 mb-4">
               Find specialized hospitals and doctors based on location, expertise, and patient ratings.
             </p>
-            <Link to="/hospitals" className="text-black font-medium hover:underline inline-flex items-center border border-black px-4 py-2 rounded-lg hover:bg-slate-200 transition-all duration-200">
+            <Link to="/hospitals" className="text-black font-medium hover:underline inline-flex items-center border-2 border-black px-4 py-2 rounded-lg hover:bg-slate-200 transition-all duration-200">
               Find Hospitals
               <span className="ml-2">→</span>
             </Link>
@@ -85,7 +130,7 @@ function Home() {
             <p className="text-gray-600 mb-4">
               Book consultations with specialists and receive medical advice from qualified professionals.
             </p>
-            <Link to="/consultations" className="text-black font-medium hover:underline inline-flex items-center border border-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200">
+            <Link to="/consultations" className="text-black font-medium hover:underline inline-flex items-center border-2 border-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-all duration-200">
               Book Appointment
               <span className="ml-2">→</span>
             </Link>

@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AdminDashboard from './pages/AdminDashboard';
 import Appointment from './pages/Appointment';
+import SignupDoc from './pages/SignupDoc';
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/profile/:id" element={<DoctorProfile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/SignupDocup" element={<SignupDoc />} />
             <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </main>
