@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { Mail } from "lucide-react";
+<<<<<<< HEAD
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
+=======
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
 
 const HospitalAppointment = () => {
   const [firstName, setFirstName] = useState("");
@@ -8,6 +13,11 @@ const HospitalAppointment = () => {
   const [purpose, setPurpose] = useState("");
   const [gender, setGender] = useState("");
 
+<<<<<<< HEAD
+  const navigate = useNavigate()
+
+=======
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://smtpjs.com/v3/smtp.js";
@@ -32,6 +42,18 @@ const HospitalAppointment = () => {
     }).then(() => alert("Mail has been sent successfully"));
   };
 
+<<<<<<< HEAD
+  const handleBookAppointment = async() => {
+    try{
+      await axios.post("http://localhost:5000/send-email", {firstName, lastName, age, gender, purpose}, {withCredentials: true});
+      navigate("/")
+    }catch(err){
+      console.log(err)
+    }
+  };
+
+=======
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
   return (
     <div className="p-4 max-w-md mx-auto bg-white shadow-md rounded-md">
       <h2 className="text-xl font-bold mb-4">Visitor Form</h2>
@@ -71,7 +93,11 @@ const HospitalAppointment = () => {
         onChange={(e) => setPurpose(e.target.value)}
       />
       <button
+<<<<<<< HEAD
+        onClick={() => handleBookAppointment()}
+=======
         onClick={sendEmail}
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
         className="w-full p-2 bg-blue-500 text-white rounded flex items-center justify-center"
       >
         <Mail className="mr-2" /> Send Mail
@@ -80,4 +106,8 @@ const HospitalAppointment = () => {
   );
 };
 
+<<<<<<< HEAD
 export default HospitalAppointment;
+=======
+export default HospitalAppointment;
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3

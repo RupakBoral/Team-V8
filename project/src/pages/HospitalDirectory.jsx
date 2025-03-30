@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+import React, { useState } from 'react';
+import { Search, Filter, Building2, Phone, Mail, Globe, MapPin, Star, X, Clock, Users, Stethoscope, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom';
+=======
 import { useState } from "react";
 import {
   Search,
@@ -16,6 +21,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
 const hospitals = [
   {
     id: 1,
@@ -112,11 +118,14 @@ function App() {
     setSelectedHospital(selectedHospital === hospitalId ? null : hospitalId);
   };
 
+<<<<<<< HEAD
+=======
   const handleBookAppointment = (hospitalName) => {
     alert(
       `Booking appointment at ${hospitalName}. This feature will be implemented soon!`
     );
   };
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
 
   selectedHospital ? hospitals.find((h) => h.id === selectedHospital) : null;
 
@@ -372,13 +381,12 @@ function App() {
                               </p>
                             </div>
                           </div>
-                          <button
-                            onClick={() => handleBookAppointment(hospital.name)}
+                          <Link to='/hospital/appointment'
                             className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center"
                           >
                             <Calendar className="h-5 w-5 mr-2" />
                             Book Appointment
-                          </button>
+                          </Link>
                         </div>
                       </div>
 

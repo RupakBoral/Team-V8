@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { FaUserMd, FaHospital, FaCalendarCheck, FaComments } from 'react-icons/fa';
 
 const brandLogos = [
-  "public/images//img1.jpg",
-  "public/images//img2.jpg",
+  "public/images//fortis.png",
+  "public/images//apollo.png",
   "public/images//img3.jpg",
   "public/images//img4.jpg",
   "public/images//img5.jpg"

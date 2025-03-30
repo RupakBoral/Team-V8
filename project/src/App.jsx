@@ -12,6 +12,7 @@ import SignupDoc from "./pages/SignupDoc";
 import Appointment from "./pages/Appointment";
 import News from "./pages/News";
 import MapComponent from "./pages/MapComponent";
+import HospitalAppointment from "./pages/HospitalAppointment";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/SignupDocup" element={<SignupDoc />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/map" element={<MapComponent />} />
+            <Route path="/hospital/appointment" element={<HospitalAppointment />} />
           </Routes>
         </main>
       </div>
