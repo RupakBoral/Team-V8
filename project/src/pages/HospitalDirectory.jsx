@@ -1,5 +1,15 @@
-import React, { useState } from 'react';
-import { Search, Filter, Building2, Phone, Mail, Globe, MapPin, Star } from 'lucide-react';
+import { useState } from "react";
+import {
+  Search,
+  Filter,
+  Building2,
+  Phone,
+  Mail,
+  Globe,
+  MapPin,
+  Star,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 const hospitals = [
   {
@@ -12,7 +22,7 @@ const hospitals = [
     specialties: ["Cardiology", "Neurology", "Oncology"],
     phone: "+1 (555) 123-4567",
     email: "info@centralmedical.com",
-    website: "www.centralmedical.com"
+    website: "www.centralmedical.com",
   },
   {
     id: 2,
@@ -24,7 +34,7 @@ const hospitals = [
     specialties: ["Orthopedics", "Pediatrics", "Surgery"],
     phone: "+1 (555) 987-6543",
     email: "contact@westsidehospital.com",
-    website: "www.westsidehospital.com"
+    website: "www.westsidehospital.com",
   },
   {
     id: 3,
@@ -36,7 +46,7 @@ const hospitals = [
     specialties: ["Cardiology", "Radiology", "Emergency Medicine"],
     phone: "+1 (555) 456-7890",
     email: "info@northviewmed.com",
-    website: "www.northviewmed.com"
+    website: "www.northviewmed.com",
   },
   {
     id: 4,
@@ -48,23 +58,27 @@ const hospitals = [
     specialties: ["Dermatology", "Psychiatry", "Internal Medicine"],
     phone: "+1 (555) 789-0123",
     email: "contact@eastsidehealth.com",
-    website: "www.eastsidehealth.com"
-  }
+    website: "www.eastsidehealth.com",
+  },
 ];
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [location, setLocation] = useState('');
-  const [specialty, setSpecialty] = useState('All Specialties');
-  const [rating, setRating] = useState('Any Rating');
-  const [sortBy, setSortBy] = useState('Distance');
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [location, setLocation] = useState("");
+  const [specialty, setSpecialty] = useState("All Specialties");
+  const [rating, setRating] = useState("Any Rating");
+  const [sortBy, setSortBy] = useState("Distance");
+
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Hospital Directory</h1>
-        <p className="text-gray-600 mb-8">Find specialized hospitals and doctors near you</p>
-        
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Hospital Directory
+        </h1>
+        <p className="text-gray-600 mb-8">
+          Find specialized hospitals and doctors near you
+        </p>
+
         {/* Search and Filters */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="relative mb-4">
@@ -77,10 +91,12 @@ function App() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Location
+              </label>
               <input
                 type="text"
                 placeholder="City, State, or Zip"
@@ -90,8 +106,10 @@ function App() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Specialty</label>
-              <select 
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Specialty
+              </label>
+              <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={specialty}
                 onChange={(e) => setSpecialty(e.target.value)}
@@ -105,8 +123,10 @@ function App() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-              <select 
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Rating
+              </label>
+              <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
@@ -118,8 +138,10 @@ function App() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
-              <select 
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Sort By
+              </label>
+              <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -130,7 +152,7 @@ function App() {
               </select>
             </div>
           </div>
-          
+
           <div className="mt-4">
             <button className="flex items-center text-gray-700 hover:text-gray-900">
               <Filter className="h-4 w-4 mr-2" />
@@ -141,20 +163,30 @@ function App() {
 
         {/* Results */}
         <div className="mb-4 flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-gray-900">Results ({hospitals.length})</h2>
-          <p className="text-gray-600">Showing 1-{hospitals.length} of {hospitals.length} hospitals</p>
+          <h2 className="text-xl font-semibold text-gray-900">
+            Results ({hospitals.length})
+          </h2>
+          <p className="text-gray-600">
+            Showing 1-{hospitals.length} of {hospitals.length} hospitals
+          </p>
         </div>
 
         <div className="space-y-4">
           {hospitals.map((hospital) => (
-            <div key={hospital.id} className="bg-white rounded-lg shadow-sm p-6">
+            <Link
+              to="/hospital/booking"
+              key={hospital.id}
+              className="bg-white rounded-lg shadow-sm p-6"
+            >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">
                   <div className="bg-gray-100 p-4 rounded-lg">
                     <Building2 className="h-8 w-8 text-gray-500" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">{hospital.name}</h3>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {hospital.name}
+                    </h3>
                     <div className="flex items-center mt-1 text-gray-600">
                       <MapPin className="h-4 w-4 mr-1" />
                       <span>{hospital.address}</span>
@@ -167,13 +199,17 @@ function App() {
                           key={i}
                           className={`h-4 w-4 ${
                             i < Math.floor(hospital.rating)
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
-                      <span className="ml-2 font-semibold">{hospital.rating}</span>
-                      <span className="ml-1 text-gray-600">({hospital.reviews} reviews)</span>
+                      <span className="ml-2 font-semibold">
+                        {hospital.rating}
+                      </span>
+                      <span className="ml-1 text-gray-600">
+                        ({hospital.reviews} reviews)
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -183,7 +219,9 @@ function App() {
               </div>
 
               <div className="mt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Specialties</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">
+                  Specialties
+                </h4>
                 <div className="flex flex-wrap gap-2">
                   {hospital.specialties.map((specialty, index) => (
                     <span
@@ -210,7 +248,7 @@ function App() {
                   <span>{hospital.website}</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

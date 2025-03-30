@@ -11,6 +11,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import SignupDoc from "./pages/SignupDoc";
 import Appointment from "./pages/Appointment";
 import News from "./pages/News";
+import HospitalAppointment from "./pages/HospitalAppointment";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/SignupDocup" element={<SignupDoc />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/hospital/booking" element={<HospitalAppointment />} />
           </Routes>
         </main>
       </div>
