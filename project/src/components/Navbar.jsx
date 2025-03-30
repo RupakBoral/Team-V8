@@ -19,7 +19,7 @@ function Navbar() {
               alt="MedConnect Logo"
               className="h-8 w-auto" // Adjust height & width as needed
             />
-            <span className="text-xl font-semibold">MedConnect</span>
+            <span className="text-xl font-semibold">MediHive</span>
           </Link>
 
           <div className="hidden md:flex space-x-8">

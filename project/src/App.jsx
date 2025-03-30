@@ -11,8 +11,10 @@ import AdminDashboard from "./pages/AdminDashboard";
 import SignupDoc from "./pages/SignupDoc";
 import Appointment from "./pages/Appointment";
 import News from "./pages/News";
+import MapComponent from "./pages/MapComponent";
 
 function App() {
+  
   return (
     <Router>
       <div className="min-h-screen">
@@ -31,10 +33,14 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/SignupDocup" element={<SignupDoc />} />
             <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/map" element={<MapComponent />} />
           </Routes>
         </main>
       </div>
     </Router>
+
+
+
   );
 }
 
