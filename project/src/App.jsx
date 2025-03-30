@@ -15,7 +15,6 @@ import MapComponent from "./pages/MapComponent";
 import HospitalAppointment from "./pages/HospitalAppointment";
 
 function App() {
-  
   return (
     <Router>
       <div className="min-h-screen">
@@ -40,9 +39,6 @@ function App() {
         </main>
       </div>
     </Router>
-
-
-
   );
 }
 

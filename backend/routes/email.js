@@ -36,4 +36,8 @@ EmailRouter.post("/send-email", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 module.exports = EmailRouter;
+=======
+module.exports = EmailRouter;
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3

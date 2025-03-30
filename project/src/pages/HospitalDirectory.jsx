@@ -1,6 +1,27 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Search, Filter, Building2, Phone, Mail, Globe, MapPin, Star, X, Clock, Users, Stethoscope, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
+=======
+import { useState } from "react";
+import {
+  Search,
+  Filter,
+  Building2,
+  Phone,
+  Mail,
+  Globe,
+  MapPin,
+  Star,
+  X,
+  Clock,
+  Users,
+  Stethoscope,
+  Calendar,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
 const hospitals = [
   {
     id: 1,
@@ -13,12 +34,15 @@ const hospitals = [
     phone: "+1 (555) 123-4567",
     email: "info@centralmedical.com",
     website: "www.centralmedical.com",
-    description: "Central Medical Center is a leading healthcare facility known for its exceptional patient care and advanced medical treatments.",
-    hours: "Monday - Friday: 8:00 AM - 8:00 PM\nSaturday: 9:00 AM - 5:00 PM\nSunday: Closed",
+    description:
+      "Central Medical Center is a leading healthcare facility known for its exceptional patient care and advanced medical treatments.",
+    hours:
+      "Monday - Friday: 8:00 AM - 8:00 PM\nSaturday: 9:00 AM - 5:00 PM\nSunday: Closed",
     doctors: 150,
     yearEstablished: 1985,
     emergencyServices: true,
-    mapImage: "https://images.unsplash.com/photo-1577519558718-693e264c6eea?auto=format&fit=crop&q=80&w=800&h=400"
+    mapImage:
+      "https://images.unsplash.com/photo-1577519558718-693e264c6eea?auto=format&fit=crop&q=80&w=800&h=400",
   },
   {
     id: 2,
@@ -31,12 +55,14 @@ const hospitals = [
     phone: "+1 (555) 987-6543",
     email: "contact@westsidehospital.com",
     website: "www.westsidehospital.com",
-    description: "Westside Hospital provides comprehensive healthcare services with a focus on surgical excellence and pediatric care.",
+    description:
+      "Westside Hospital provides comprehensive healthcare services with a focus on surgical excellence and pediatric care.",
     hours: "24/7",
     doctors: 200,
     yearEstablished: 1990,
     emergencyServices: true,
-    mapImage: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&q=80&w=800&h=400"
+    mapImage:
+      "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&q=80&w=800&h=400",
   },
   {
     id: 3,
@@ -49,12 +75,14 @@ const hospitals = [
     phone: "+1 (555) 456-7890",
     email: "info@northviewmed.com",
     website: "www.northviewmed.com",
-    description: "Northview Medical Center is renowned for its state-of-the-art cardiac care and emergency services.",
+    description:
+      "Northview Medical Center is renowned for its state-of-the-art cardiac care and emergency services.",
     hours: "24/7",
     doctors: 180,
     yearEstablished: 1978,
     emergencyServices: true,
-    mapImage: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=800&h=400"
+    mapImage:
+      "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=800&h=400",
   },
   {
     id: 4,
@@ -67,38 +95,50 @@ const hospitals = [
     phone: "+1 (555) 789-0123",
     email: "contact@eastsidehealth.com",
     website: "www.eastsidehealth.com",
-    description: "Eastside Health Center specializes in comprehensive outpatient care and mental health services.",
+    description:
+      "Eastside Health Center specializes in comprehensive outpatient care and mental health services.",
     hours: "Monday - Saturday: 8:00 AM - 6:00 PM\nSunday: Closed",
     doctors: 120,
     yearEstablished: 1995,
     emergencyServices: false,
-    mapImage: "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?auto=format&fit=crop&q=80&w=800&h=400"
-  }
+    mapImage:
+      "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?auto=format&fit=crop&q=80&w=800&h=400",
+  },
 ];
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [location, setLocation] = useState('');
-  const [specialty, setSpecialty] = useState('All Specialties');
-  const [rating, setRating] = useState('Any Rating');
-  const [sortBy, setSortBy] = useState('Distance');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [location, setLocation] = useState("");
+  const [specialty, setSpecialty] = useState("All Specialties");
+  const [rating, setRating] = useState("Any Rating");
+  const [sortBy, setSortBy] = useState("Distance");
   const [selectedHospital, setSelectedHospital] = useState(null);
-  
+
   const handleViewDetails = (hospitalId) => {
     setSelectedHospital(selectedHospital === hospitalId ? null : hospitalId);
   };
 
+<<<<<<< HEAD
+=======
+  const handleBookAppointment = (hospitalName) => {
+    alert(
+      `Booking appointment at ${hospitalName}. This feature will be implemented soon!`
+    );
+  };
+>>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
 
-  const selectedHospitalData = selectedHospital 
-    ? hospitals.find(h => h.id === selectedHospital)
-    : null;
+  selectedHospital ? hospitals.find((h) => h.id === selectedHospital) : null;
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Hospital Directory</h1>
-        <p className="text-gray-600 mb-8">Find specialized hospitals and doctors near you</p>
-        
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          Hospital Directory
+        </h1>
+        <p className="text-gray-600 mb-8">
+          Find specialized hospitals and doctors near you
+        </p>
+
         {/* Search and Filters */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <div className="relative mb-4">
@@ -111,10 +151,12 @@ function App() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Location
+              </label>
               <input
                 type="text"
                 placeholder="City, State, or Zip"
@@ -124,8 +166,10 @@ function App() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Specialty</label>
-              <select 
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Specialty
+              </label>
+              <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={specialty}
                 onChange={(e) => setSpecialty(e.target.value)}
@@ -139,8 +183,10 @@ function App() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Rating</label>
-              <select 
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Rating
+              </label>
+              <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={rating}
                 onChange={(e) => setRating(e.target.value)}
@@ -152,8 +198,10 @@ function App() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sort By</label>
-              <select 
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Sort By
+              </label>
+              <select
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -164,7 +212,7 @@ function App() {
               </select>
             </div>
           </div>
-          
+
           <div className="mt-4">
             <button className="flex items-center text-gray-700 hover:text-gray-900">
               <Filter className="h-4 w-4 mr-2" />
@@ -175,20 +223,30 @@ function App() {
 
         {/* Results */}
         <div className="mb-4 flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-gray-900">Results ({hospitals.length})</h2>
-          <p className="text-gray-600">Showing 1-{hospitals.length} of {hospitals.length} hospitals</p>
+          <h2 className="text-xl font-semibold text-gray-900">
+            Results ({hospitals.length})
+          </h2>
+          <p className="text-gray-600">
+            Showing 1-{hospitals.length} of {hospitals.length} hospitals
+          </p>
         </div>
 
         <div className="space-y-4">
           {hospitals.map((hospital) => (
-            <div key={hospital.id} className="bg-white rounded-lg shadow-sm p-6">
+            <Link
+              to="/hospital/booking"
+              key={hospital.id}
+              className="bg-white rounded-lg shadow-sm p-6"
+            >
               <div className="flex items-start justify-between">
                 <div className="flex items-start space-x-4">
                   <div className="bg-gray-100 p-4 rounded-lg">
                     <Building2 className="h-8 w-8 text-gray-500" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">{hospital.name}</h3>
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {hospital.name}
+                    </h3>
                     <div className="flex items-center mt-1 text-gray-600">
                       <MapPin className="h-4 w-4 mr-1" />
                       <span>{hospital.address}</span>
@@ -201,21 +259,25 @@ function App() {
                           key={i}
                           className={`h-4 w-4 ${
                             i < Math.floor(hospital.rating)
-                              ? 'text-yellow-400 fill-current'
-                              : 'text-gray-300'
+                              ? "text-yellow-400 fill-current"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
-                      <span className="ml-2 font-semibold">{hospital.rating}</span>
-                      <span className="ml-1 text-gray-600">({hospital.reviews} reviews)</span>
+                      <span className="ml-2 font-semibold">
+                        {hospital.rating}
+                      </span>
+                      <span className="ml-1 text-gray-600">
+                        ({hospital.reviews} reviews)
+                      </span>
                     </div>
                   </div>
                 </div>
-                <button 
+                <button
                   className={`px-4 py-2 rounded-lg transition-colors ${
-                    selectedHospital === hospital.id 
-                      ? 'bg-gray-200 text-gray-800 hover:bg-gray-300' 
-                      : 'bg-black text-white hover:bg-gray-800'
+                    selectedHospital === hospital.id
+                      ? "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                      : "bg-black text-white hover:bg-gray-800"
                   }`}
                   onClick={() => handleViewDetails(hospital.id)}
                 >
@@ -225,13 +287,15 @@ function App() {
                       Close Details
                     </span>
                   ) : (
-                    'View Details'
+                    "View Details"
                   )}
                 </button>
               </div>
 
               <div className="mt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Specialties</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">
+                  Specialties
+                </h4>
                 <div className="flex flex-wrap gap-2">
                   {hospital.specialties.map((specialty, index) => (
                     <span
@@ -264,38 +328,56 @@ function App() {
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <div className="prose max-w-none">
                     <p className="text-gray-700 mb-6">{hospital.description}</p>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-4">Hospital Information</h4>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                          Hospital Information
+                        </h4>
                         <div className="space-y-3">
                           <div className="flex items-start">
                             <Clock className="h-5 w-5 text-gray-500 mr-3 mt-0.5" />
                             <div>
-                              <p className="font-medium text-gray-900">Operating Hours</p>
-                              <p className="text-gray-600 whitespace-pre-line">{hospital.hours}</p>
+                              <p className="font-medium text-gray-900">
+                                Operating Hours
+                              </p>
+                              <p className="text-gray-600 whitespace-pre-line">
+                                {hospital.hours}
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-center">
                             <Users className="h-5 w-5 text-gray-500 mr-3" />
                             <div>
-                              <p className="font-medium text-gray-900">Medical Staff</p>
-                              <p className="text-gray-600">{hospital.doctors} Doctors</p>
+                              <p className="font-medium text-gray-900">
+                                Medical Staff
+                              </p>
+                              <p className="text-gray-600">
+                                {hospital.doctors} Doctors
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-center">
                             <Calendar className="h-5 w-5 text-gray-500 mr-3" />
                             <div>
-                              <p className="font-medium text-gray-900">Established</p>
-                              <p className="text-gray-600">{hospital.yearEstablished}</p>
+                              <p className="font-medium text-gray-900">
+                                Established
+                              </p>
+                              <p className="text-gray-600">
+                                {hospital.yearEstablished}
+                              </p>
                             </div>
                           </div>
                           <div className="flex items-center">
                             <Stethoscope className="h-5 w-5 text-gray-500 mr-3" />
                             <div>
-                              <p className="font-medium text-gray-900">Emergency Services</p>
+                              <p className="font-medium text-gray-900">
+                                Emergency Services
+                              </p>
                               <p className="text-gray-600">
-                                {hospital.emergencyServices ? '24/7 Emergency Care Available' : 'No Emergency Services'}
+                                {hospital.emergencyServices
+                                  ? "24/7 Emergency Care Available"
+                                  : "No Emergency Services"}
                               </p>
                             </div>
                           </div>
@@ -307,9 +389,11 @@ function App() {
                           </Link>
                         </div>
                       </div>
-                      
+
                       <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-4">Contact & Location</h4>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                          Contact & Location
+                        </h4>
                         <div className="bg-gray-100 rounded-lg p-4">
                           <img
                             src={hospital.mapImage}
@@ -340,7 +424,7 @@ function App() {
                   </div>
                 </div>
               )}
-            </div>
+            </Link>
           ))}
         </div>
       </div>
