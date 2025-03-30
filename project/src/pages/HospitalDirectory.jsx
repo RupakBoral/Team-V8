@@ -118,9 +118,7 @@ function App() {
     );
   };
 
-  const selectedHospitalData = selectedHospital
-    ? hospitals.find((h) => h.id === selectedHospital)
-    : null;
+  selectedHospital ? hospitals.find((h) => h.id === selectedHospital) : null;
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
