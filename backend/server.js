@@ -20,6 +20,7 @@ const AuthRouter = require("./routes/auth.js");
 const ProfileRouter = require("./routes/profile.js");
 const ConsultRouter = require("./routes/consult.js");
 const AppointmentRouter = require("./routes/appointment.js");
+const EmailRouter = require("./routes/email.js");
 
 app.use("/", AuthRouter);
 
@@ -28,6 +29,8 @@ app.use("/", ProfileRouter);
 app.use("/", ConsultRouter);
 
 app.use("/", AppointmentRouter);
+
+app.use("/", EmailRouter);
 
 DBconnection()
   .then(() => {
