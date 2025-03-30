@@ -13,7 +13,7 @@ function Home() {
   return (
     <div className="space-y-24">
       {/* Hero Section */}
-      <section className="relative py-20 px">
+      <section className="relative py-20">
       {/* Background Video */}
       <video 
         autoPlay 

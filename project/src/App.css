@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+.leaflet-container {
+  height: 400px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+
 .logo {
   height: 6em;
   padding: 1.5em;

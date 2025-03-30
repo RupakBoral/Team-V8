@@ -8,6 +8,11 @@ import {
   Globe,
   MapPin,
   Star,
+  X,
+  Clock,
+  Users,
+  Stethoscope,
+  Calendar,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -23,6 +28,15 @@ const hospitals = [
     phone: "+1 (555) 123-4567",
     email: "info@centralmedical.com",
     website: "www.centralmedical.com",
+    description:
+      "Central Medical Center is a leading healthcare facility known for its exceptional patient care and advanced medical treatments.",
+    hours:
+      "Monday - Friday: 8:00 AM - 8:00 PM\nSaturday: 9:00 AM - 5:00 PM\nSunday: Closed",
+    doctors: 150,
+    yearEstablished: 1985,
+    emergencyServices: true,
+    mapImage:
+      "https://images.unsplash.com/photo-1577519558718-693e264c6eea?auto=format&fit=crop&q=80&w=800&h=400",
   },
   {
     id: 2,
@@ -35,6 +49,14 @@ const hospitals = [
     phone: "+1 (555) 987-6543",
     email: "contact@westsidehospital.com",
     website: "www.westsidehospital.com",
+    description:
+      "Westside Hospital provides comprehensive healthcare services with a focus on surgical excellence and pediatric care.",
+    hours: "24/7",
+    doctors: 200,
+    yearEstablished: 1990,
+    emergencyServices: true,
+    mapImage:
+      "https://images.unsplash.com/photo-1582719471384-894fbb16e074?auto=format&fit=crop&q=80&w=800&h=400",
   },
   {
     id: 3,
@@ -47,6 +69,14 @@ const hospitals = [
     phone: "+1 (555) 456-7890",
     email: "info@northviewmed.com",
     website: "www.northviewmed.com",
+    description:
+      "Northview Medical Center is renowned for its state-of-the-art cardiac care and emergency services.",
+    hours: "24/7",
+    doctors: 180,
+    yearEstablished: 1978,
+    emergencyServices: true,
+    mapImage:
+      "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&q=80&w=800&h=400",
   },
   {
     id: 4,
@@ -59,6 +89,14 @@ const hospitals = [
     phone: "+1 (555) 789-0123",
     email: "contact@eastsidehealth.com",
     website: "www.eastsidehealth.com",
+    description:
+      "Eastside Health Center specializes in comprehensive outpatient care and mental health services.",
+    hours: "Monday - Saturday: 8:00 AM - 6:00 PM\nSunday: Closed",
+    doctors: 120,
+    yearEstablished: 1995,
+    emergencyServices: false,
+    mapImage:
+      "https://images.unsplash.com/photo-1596541223130-5d31a73fb6c6?auto=format&fit=crop&q=80&w=800&h=400",
   },
 ];
 
@@ -68,6 +106,21 @@ function App() {
   const [specialty, setSpecialty] = useState("All Specialties");
   const [rating, setRating] = useState("Any Rating");
   const [sortBy, setSortBy] = useState("Distance");
+  const [selectedHospital, setSelectedHospital] = useState(null);
+
+  const handleViewDetails = (hospitalId) => {
+    setSelectedHospital(selectedHospital === hospitalId ? null : hospitalId);
+  };
+
+  const handleBookAppointment = (hospitalName) => {
+    alert(
+      `Booking appointment at ${hospitalName}. This feature will be implemented soon!`
+    );
+  };
+
+  const selectedHospitalData = selectedHospital
+    ? hospitals.find((h) => h.id === selectedHospital)
+    : null;
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -213,8 +266,22 @@ function App() {
                     </div>
                   </div>
                 </div>
-                <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors">
-                  View Details
+                <button
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    selectedHospital === hospital.id
+                      ? "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                      : "bg-black text-white hover:bg-gray-800"
+                  }`}
+                  onClick={() => handleViewDetails(hospital.id)}
+                >
+                  {selectedHospital === hospital.id ? (
+                    <span className="flex items-center">
+                      <X className="h-4 w-4 mr-2" />
+                      Close Details
+                    </span>
+                  ) : (
+                    "View Details"
+                  )}
                 </button>
               </div>
 
@@ -248,6 +315,109 @@ function App() {
                   <span>{hospital.website}</span>
                 </div>
               </div>
+
+              {/* Detailed View */}
+              {selectedHospital === hospital.id && (
+                <div className="mt-6 pt-6 border-t border-gray-200">
+                  <div className="prose max-w-none">
+                    <p className="text-gray-700 mb-6">{hospital.description}</p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                          Hospital Information
+                        </h4>
+                        <div className="space-y-3">
+                          <div className="flex items-start">
+                            <Clock className="h-5 w-5 text-gray-500 mr-3 mt-0.5" />
+                            <div>
+                              <p className="font-medium text-gray-900">
+                                Operating Hours
+                              </p>
+                              <p className="text-gray-600 whitespace-pre-line">
+                                {hospital.hours}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <Users className="h-5 w-5 text-gray-500 mr-3" />
+                            <div>
+                              <p className="font-medium text-gray-900">
+                                Medical Staff
+                              </p>
+                              <p className="text-gray-600">
+                                {hospital.doctors} Doctors
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <Calendar className="h-5 w-5 text-gray-500 mr-3" />
+                            <div>
+                              <p className="font-medium text-gray-900">
+                                Established
+                              </p>
+                              <p className="text-gray-600">
+                                {hospital.yearEstablished}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center">
+                            <Stethoscope className="h-5 w-5 text-gray-500 mr-3" />
+                            <div>
+                              <p className="font-medium text-gray-900">
+                                Emergency Services
+                              </p>
+                              <p className="text-gray-600">
+                                {hospital.emergencyServices
+                                  ? "24/7 Emergency Care Available"
+                                  : "No Emergency Services"}
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => handleBookAppointment(hospital.name)}
+                            className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center justify-center"
+                          >
+                            <Calendar className="h-5 w-5 mr-2" />
+                            Book Appointment
+                          </button>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                          Contact & Location
+                        </h4>
+                        <div className="bg-gray-100 rounded-lg p-4">
+                          <img
+                            src={hospital.mapImage}
+                            alt={`${hospital.name} location`}
+                            className="w-full h-48 rounded-lg mb-4 object-cover"
+                          />
+                          <div className="space-y-2">
+                            <p className="flex items-center text-gray-600">
+                              <MapPin className="h-4 w-4 mr-2" />
+                              {hospital.address}
+                            </p>
+                            <p className="flex items-center text-gray-600">
+                              <Phone className="h-4 w-4 mr-2" />
+                              {hospital.phone}
+                            </p>
+                            <p className="flex items-center text-gray-600">
+                              <Mail className="h-4 w-4 mr-2" />
+                              {hospital.email}
+                            </p>
+                            <p className="flex items-center text-gray-600">
+                              <Globe className="h-4 w-4 mr-2" />
+                              {hospital.website}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </Link>
           ))}
         </div>
