@@ -1,27 +1,6 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { Search, Filter, Building2, Phone, Mail, Globe, MapPin, Star, X, Clock, Users, Stethoscope, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
-=======
-import { useState } from "react";
-import {
-  Search,
-  Filter,
-  Building2,
-  Phone,
-  Mail,
-  Globe,
-  MapPin,
-  Star,
-  X,
-  Clock,
-  Users,
-  Stethoscope,
-  Calendar,
-} from "lucide-react";
-import { Link } from "react-router-dom";
-
->>>>>>> cfa8f66651824d2300d8680625bb509c2c03ccc3
 const hospitals = [
   {
     id: 1,
